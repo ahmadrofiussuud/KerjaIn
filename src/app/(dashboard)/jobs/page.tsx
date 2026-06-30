@@ -180,15 +180,15 @@ export default function LandingJobsPage() {
               </p>
 
               {/* Quick Stats */}
-              <div className="mt-10 grid grid-cols-3 gap-6 max-w-xl border-t border-slate-100 pt-8 max-sm:grid-cols-1 max-lg:mx-auto">
+              <div className="mt-10 grid grid-cols-3 gap-3 sm:gap-6 max-w-xl border-t border-slate-100 pt-8 max-lg:mx-auto">
                 {[
                   { label: "Pekerja Aktif", val: "12,450+" },
                   { label: "UMKM Bermitra", val: "1,200+" },
                   { label: "Total Tersalurkan", val: "45,000+" },
                 ].map((stat, i) => (
                   <div key={i} className="text-center lg:text-left">
-                    <p className="text-2xl font-bold text-slate-900">{stat.val}</p>
-                    <p className="text-xs text-slate-500 mt-1">{stat.label}</p>
+                    <p className="text-xl sm:text-2xl font-bold text-slate-900">{stat.val}</p>
+                    <p className="text-[10px] sm:text-xs text-slate-500 mt-1">{stat.label}</p>
                   </div>
                 ))}
               </div>

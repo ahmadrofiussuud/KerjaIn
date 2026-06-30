@@ -191,14 +191,14 @@ export default function LandingPage() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
 
             {/* Left: Copy */}
-            <div className="space-y-8">
+            <div className="space-y-8 flex flex-col items-center lg:items-start text-center lg:text-left">
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-bold">
                 <span className="h-2 w-2 rounded-full bg-sky-500 animate-pulse" />
                 Platform Kerja Informal Terpercaya #1 Indonesia
               </div>
 
-              <h1 className="text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] text-slate-900">
+              <h1 className="text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] text-slate-900 w-full">
                 Cari Kerja Harian &{" "}
                 <span className="bg-gradient-to-r from-sky-600 via-sky-500 to-cyan-500 bg-clip-text text-transparent">
                   Sampingan
@@ -212,7 +212,7 @@ export default function LandingPage() {
               </p>
 
               {/* CTA Buttons */}
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap justify-center lg:justify-start gap-4 w-full">
                 <a
                   href="#lowongan"
                   className="px-7 py-3.5 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl shadow-lg shadow-sky-200 hover:shadow-xl hover:shadow-sky-200 hover:-translate-y-0.5 transition-all text-sm"
@@ -228,7 +228,7 @@ export default function LandingPage() {
               </div>
 
               {/* Trust badges */}
-              <div className="flex flex-wrap items-center gap-6 text-xs font-semibold text-slate-500">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs font-semibold text-slate-500 w-full">
                 <span className="flex items-center gap-1.5">
                   <svg className="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
@@ -248,7 +248,6 @@ export default function LandingPage() {
                   Gaji Harian Transparan
                 </span>
               </div>
-            </div>
 
             {/* Right: Stats Cards */}
             <div className="grid grid-cols-2 gap-4">
