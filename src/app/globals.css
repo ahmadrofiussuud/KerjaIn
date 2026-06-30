@@ -1,26 +1,298 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+ * ─── DESKTOP-FIRST CUSTOM BREAKPOINTS ────────────────────────────────────────
+ *
+ * Tailwind CSS v4 uses CSS-based configuration.
+ * Since Tailwind is mobile-first by default, we define max-width breakpoints
+ * for our desktop-first approach. Base styles target desktop (≥1024px).
+ * Use max-lg:, max-md:, max-sm: for tablet/mobile overrides.
+ */
+
+@custom-variant max-2xl (@media (width < 1536px));
+@custom-variant max-xl (@media (width < 1280px));
+@custom-variant max-lg (@media (width < 1024px));
+@custom-variant max-md (@media (width < 768px));
+@custom-variant max-sm (@media (width < 640px));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* ── Deep Navy & Slate Palette (Professional Light) ── */
+  --color-deep-50: #f8fafc;
+  --color-deep-100: #f1f5f9;
+  --color-deep-200: #e2e8f0;
+  --color-deep-300: #cbd5e1;
+  --color-deep-400: #94a3b8;
+  --color-deep-500: #64748b;
+  --color-deep-600: #475569;
+  --color-deep-700: #334155;
+  --color-deep-800: #1e293b;
+  --color-deep-900: #0f172a;
+  --color-deep-950: #020617;
+
+  /* ── Smooth Ocean Blue Accent ── */
+  --color-cyan-50: #f0f9ff;
+  --color-cyan-100: #e0f2fe;
+  --color-cyan-200: #bae6fd;
+  --color-cyan-300: #7dd3fc;
+  --color-cyan-400: #38bdf8;
+  --color-cyan-500: #0284c7; /* Ocean Blue */
+  --color-cyan-600: #0369a1;
+  --color-cyan-700: #075985;
+  --color-cyan-800: #0c4a6e;
+  --color-cyan-900: #0a3a5c;
+  --color-cyan-950: #031e33;
+
+  /* ── Slate Neutral ── */
+  --color-slate-50: #ffffff;
+  --color-slate-100: #f8fafc;
+  --color-slate-200: #f1f5f9;
+  --color-slate-300: #e2e8f0;
+  --color-slate-400: #cbd5e1;
+  --color-slate-500: #94a3b8;
+  --color-slate-600: #64748b;
+  --color-slate-700: #475569;
+  --color-slate-800: #334155;
+  --color-slate-900: #1e293b;
+  --color-slate-950: #0f172a;
+
+  /* ── Status Colors ── */
+  --color-success-50: #f0fdf4;
+  --color-success-500: #16a34a;
+  --color-success-600: #15803d;
+  --color-warning-50: #fffbeb;
+  --color-warning-500: #d97706;
+  --color-warning-600: #b45309;
+  --color-error-50: #fef2f2;
+  --color-error-500: #dc2626;
+  --color-error-600: #b91c1c;
+  --color-urgent-500: #ea580c;
+  --color-urgent-600: #c2410c;
+
+  /* ── Semantic Aliases (Dominan Putih Bersih) ── */
+  --color-background: #ffffff;
+  --color-foreground: #0f172a;
+  --color-card: #ffffff;
+  --color-card-foreground: #1e293b;
+  --color-muted: #f8fafc;
+  --color-muted-foreground: #64748b;
+  --color-border: #e2e8f0;
+  --color-ring: #0284c7;
+
+  /* ── Typography ── */
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "Fira Code", "Cascadia Code", monospace;
+
+  /* ── Clean & Soft Light Shadows ── */
+  --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.03);
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.01);
+  --shadow-elevated: 0 20px 40px -15px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.02);
+  --shadow-glow-cyan: 0 0 15px rgba(2, 132, 199, 0.15);
+  --shadow-glow-cyan-sm: 0 0 8px rgba(2, 132, 199, 0.1);
+  --shadow-glow-cyan-lg: 0 0 25px rgba(2, 132, 199, 0.2);
+  --shadow-glow-urgent: 0 0 12px rgba(234, 88, 12, 0.15);
+
+  /* ── Border Radius ── */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* ── Animations ── */
+  --animate-fade-in: fade-in 0.5s ease-out;
+  --animate-slide-up: slide-up 0.5s ease-out;
+  --animate-slide-down: slide-down 0.3s ease-out;
+  --animate-glow-pulse: glow-pulse 2s ease-in-out infinite;
+  --animate-urgent-pulse: urgent-pulse 2s ease-in-out infinite;
 }
 
+/*
+ * ─── FORCE LIGHT MODE (Matikan Tampilan Gelap Robotik) ───────────────────────
+ */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  @theme inline {
+    --color-background: #ffffff;
+    --color-foreground: #0f172a;
+    --color-card: #ffffff;
+    --color-card-foreground: #1e293b;
+    --color-muted: #f8fafc;
+    --color-muted-foreground: #64748b;
+    --color-border: #e2e8f0;
+    --color-ring: #0284c7;
+    --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.03);
+    --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
   }
 }
 
+/*
+ * ─── BASE STYLES ─────────────────────────────────────────────────────────────
+ */
+
+*,
+*::before,
+*::after {
+  border-color: var(--color-border);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*
+ * ─── KEYFRAMES ───────────────────────────────────────────────────────────────
+ */
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgb(0 229 255 / 0.2), 0 0 30px rgb(0 229 255 / 0.05);
+  }
+  50% {
+    box-shadow: 0 0 18px rgb(0 229 255 / 0.35),
+      0 0 50px rgb(0 229 255 / 0.12);
+  }
+}
+
+@keyframes urgent-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 4px rgb(255 107 53 / 0.3);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 12px rgb(255 107 53 / 0.5),
+      0 0 24px rgb(255 107 53 / 0.15);
+    opacity: 0.85;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*
+ * ─── SCROLLBAR STYLING ──────────────────────────────────────────────────────
+ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-slate-300);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-slate-400);
+}
+
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-slate-700);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-slate-600);
+  }
+}
+
+/*
+ * ─── FOCUS STYLES ────────────────────────────────────────────────────────────
+ */
+
+:focus-visible {
+  outline: 2px solid var(--color-cyan-500);
+  outline-offset: 2px;
+}
+
+/*
+ * ─── UTILITIES ───────────────────────────────────────────────────────────────
+ */
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/*
+ * ─── ANIMATIONS ──────────────────────────────────────────────────────────────
+ */
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-slide-down {
+  animation: slide-down 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
