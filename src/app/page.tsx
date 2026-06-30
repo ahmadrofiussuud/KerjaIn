@@ -248,6 +248,7 @@ export default function LandingPage() {
                   Gaji Harian Transparan
                 </span>
               </div>
+            </div>
 
             {/* Right: Stats Cards */}
             <div className="grid grid-cols-2 gap-4">
