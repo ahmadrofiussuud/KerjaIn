@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { PublicNavbar } from "@/components/layout/public-navbar";
 import { Footer } from "@/components/layout/footer";
+import { cn } from "@/lib/utils";
 
 // Preview jobs for landing page (hanya sebagai teaser)
 const previewJobs = [
@@ -16,7 +17,10 @@ const previewJobs = [
     salary: "Rp 150.000 - 200.000/hari",
     type: "Harian",
     is_urgent: true,
-    emoji: "☕",
+    cover: "/barista_cover_1782741796312.png",
+    companyInitials: "KK",
+    companyColor: "bg-amber-600",
+    description: "Dibutuhkan barista berpengalaman untuk kafe premium di area Sudirman. Jam kerja fleksibel, lingkungan kerja modern.",
   },
   {
     id: "j2",
@@ -26,7 +30,10 @@ const previewJobs = [
     salary: "Rp 3.500.000/bulan",
     type: "Shift",
     is_urgent: false,
-    emoji: "🏪",
+    cover: "/cashier_cover_1782741807800.png",
+    companyInitials: "TM",
+    companyColor: "bg-indigo-600",
+    description: "Dibutuhkan kasir untuk toko swalayan lokal shift malam (22:00-06:00). Diutamakan jujur, ramah, dan teliti.",
   },
   {
     id: "j3",
@@ -36,7 +43,10 @@ const previewJobs = [
     salary: "Rp 120.000 - 180.000/hari",
     type: "Harian",
     is_urgent: true,
-    emoji: "🏍️",
+    cover: "/courier_cover_1782741835656.png",
+    companyInitials: "EK",
+    companyColor: "bg-teal-600",
+    description: "Dicari kurir motor harian untuk pengantaran paket logistik area Jabodetabek. Wajib memiliki SIM C aktif.",
   },
   {
     id: "j4",
@@ -46,7 +56,10 @@ const previewJobs = [
     salary: "Rp 3.200.000/bulan",
     type: "Shift",
     is_urgent: false,
-    emoji: "📦",
+    cover: "/warehouse_cover_1782741851815.png",
+    companyInitials: "GR",
+    companyColor: "bg-slate-500",
+    description: "Membantu operasional gudang, packing barang, loading/unloading, dan pencatatan stock opname shift pagi.",
   },
   {
     id: "j5",
@@ -56,7 +69,10 @@ const previewJobs = [
     salary: "Rp 4.000.000 - 5.000.000/bulan",
     type: "Full-time",
     is_urgent: false,
-    emoji: "💼",
+    cover: "/office_cover_1782741819514.png",
+    companyInitials: "LN",
+    companyColor: "bg-sky-600",
+    description: "Mengelola administrasi pengiriman, menjawab pertanyaan customer via WhatsApp chat secara ramah dan profesional.",
   },
   {
     id: "j6",
@@ -66,7 +82,10 @@ const previewJobs = [
     salary: "Rp 170.000/hari",
     type: "Harian",
     is_urgent: true,
-    emoji: "🍳",
+    cover: "/cooking_cover_1782741864976.png",
+    companyInitials: "WB",
+    companyColor: "bg-emerald-600",
+    description: "Mencari juru masak berpengalaman untuk warteg sibuk. Mampu memasak masakan rumah dengan rasa yang konsisten.",
   },
 ];
 
@@ -389,44 +408,66 @@ export default function LandingPage() {
               <button
                 key={job.id}
                 onClick={handleJobClick}
-                className="text-left p-5 bg-white rounded-2xl border border-slate-200 hover:border-sky-400 hover:shadow-lg hover:-translate-y-0.5 transition-all group w-full"
+                className="text-left bg-white rounded-2xl border border-slate-200 hover:border-sky-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group w-full overflow-hidden flex flex-col justify-between"
               >
-                {/* Header row */}
-                <div className="flex items-start justify-between gap-3 mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="h-12 w-12 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-2xl group-hover:bg-sky-50 group-hover:border-sky-200 transition-colors shrink-0">
-                      {job.emoji}
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-slate-900 text-sm group-hover:text-sky-700 transition-colors">{job.title}</h3>
-                      <p className="text-xs text-slate-500 mt-0.5">{job.company}</p>
-                    </div>
-                  </div>
-                  {job.is_urgent && (
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-50 text-red-600 border border-red-200 shrink-0">
-                      Urgent
+                {/* Cover Image */}
+                <div className="relative w-full h-36 overflow-hidden bg-slate-100 border-b border-slate-200 shrink-0">
+                  <img
+                    src={job.cover}
+                    alt={job.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  {/* Badges on Cover */}
+                  <div className="absolute top-3 right-3 flex items-center gap-1.5 flex-wrap">
+                    {job.is_urgent && (
+                      <span className="px-2 py-0.5 bg-red-500 text-white text-[9px] font-bold rounded-md shadow-sm uppercase tracking-wider">
+                        Urgent
+                      </span>
+                    )}
+                    <span className="px-2 py-0.5 bg-white text-slate-800 text-[9px] font-bold rounded-md shadow-sm">
+                      {job.type}
                     </span>
-                  )}
-                </div>
-
-                {/* Info row */}
-                <div className="space-y-2">
-                  <div className="flex items-center gap-1.5 text-[11px] text-slate-500">
-                    <svg className="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    </svg>
-                    {job.location}
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-slate-900">{job.salary}</span>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-sky-50 text-sky-600 border border-sky-100">{job.type}</span>
                   </div>
                 </div>
 
-                {/* CTA hint */}
-                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-[11px] text-slate-400 font-medium">Klik untuk melamar</span>
-                  <span className="text-sky-600 text-xs font-bold group-hover:translate-x-1 transition-transform inline-block">→</span>
+                {/* Content Body */}
+                <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+                  <div className="space-y-3">
+                    {/* Company Info */}
+                    <div className="flex items-center gap-2.5">
+                      <div className={cn(
+                        "h-8 w-8 rounded-lg flex items-center justify-center text-xs font-extrabold text-white shrink-0 shadow-sm",
+                        job.companyColor
+                      )}>
+                        {job.companyInitials}
+                      </div>
+                      <div>
+                        <p className="text-xs font-bold text-slate-700 leading-none">{job.company}</p>
+                        <p className="text-[9px] text-slate-400 mt-1 leading-none">{job.location}</p>
+                      </div>
+                    </div>
+
+                    {/* Position & Description */}
+                    <div>
+                      <h3 className="font-extrabold text-slate-900 text-sm leading-snug group-hover:text-sky-600 transition-colors line-clamp-1">
+                        {job.title}
+                      </h3>
+                      <p className="text-xs text-slate-500 mt-2 line-clamp-2 leading-relaxed">
+                        {job.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Salary & Action hint */}
+                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2 mt-auto">
+                    <div>
+                      <p className="text-[9px] text-slate-450 font-bold uppercase tracking-wider leading-none text-slate-400">Upah / Gaji</p>
+                      <p className="text-xs font-black text-sky-600 mt-1">{job.salary}</p>
+                    </div>
+                    <span className="px-3 py-2 bg-sky-600 text-white text-xs font-bold rounded-lg group-hover:bg-sky-500 transition-colors shrink-0">
+                      Lamar Cepat
+                    </span>
+                  </div>
                 </div>
               </button>
             ))}
