@@ -250,28 +250,53 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Right: Stats Cards */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="col-span-2 p-6 bg-gradient-to-br from-sky-600 to-cyan-600 rounded-3xl text-white shadow-xl shadow-sky-200">
-                <p className="text-sky-100 text-sm font-medium">Total Pekerja Tersalurkan</p>
-                <p className="text-5xl font-extrabold mt-1">45.000+</p>
-                <p className="text-sky-100 text-xs mt-2">Di seluruh Indonesia 🇮🇩</p>
-              </div>
-              <div className="p-5 bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-                <p className="text-3xl font-extrabold text-slate-900">12k+</p>
-                <p className="text-xs text-slate-500 mt-1 font-medium">Pekerja Aktif</p>
-              </div>
-              <div className="p-5 bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-                <p className="text-3xl font-extrabold text-slate-900">1.2k+</p>
-                <p className="text-xs text-slate-500 mt-1 font-medium">Mitra UMKM</p>
-              </div>
-              <div className="p-5 bg-slate-900 rounded-2xl text-white shadow-lg">
-                <p className="text-3xl font-extrabold">98%</p>
-                <p className="text-xs text-slate-400 mt-1 font-medium">Tingkat Kepuasan</p>
-              </div>
-              <div className="p-5 bg-emerald-50 border border-emerald-100 rounded-2xl shadow-sm">
-                <p className="text-3xl font-extrabold text-emerald-700">&lt;2 Jam</p>
-                <p className="text-xs text-emerald-600 mt-1 font-medium">Rata-rata Waktu Rekrut</p>
+            {/* Right: Premium Mockup Image like MandorIn */}
+            <div className="relative flex justify-center lg:justify-end items-center max-lg:mt-12">
+              <div className="relative w-full max-w-md lg:max-w-none aspect-square bg-slate-50 border border-slate-200/80 rounded-3xl p-6 shadow-xl shadow-slate-100 flex items-center justify-center overflow-visible">
+                
+                {/* Main Job Illustration */}
+                <div className="relative w-full h-full rounded-2xl overflow-hidden border border-slate-200/50 bg-white">
+                  <img
+                    src="/hero_kerjain.png"
+                    alt="KerjaIn Kolaborasi Pekerja & UMKM"
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                  {/* Subtle overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 via-transparent to-transparent pointer-events-none" />
+                </div>
+
+                {/* Floating Card 1: Gaji Harian Cair */}
+                <div className="absolute -top-5 -left-5 bg-white border border-slate-200/80 rounded-2xl p-3.5 shadow-lg flex items-center gap-3 animate-bounce-slow max-sm:-left-2">
+                  <div className="h-10 w-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-lg">
+                    💰
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-900">Gaji Harian Cair</h4>
+                    <p className="text-[10px] text-slate-500 mt-0.5">Dana aman & cepat cair</p>
+                  </div>
+                </div>
+
+                {/* Floating Card 2: Verifikasi KTP */}
+                <div className="absolute top-1/2 -right-8 -translate-y-1/2 bg-white border border-slate-200/80 rounded-2xl p-3.5 shadow-lg flex items-center gap-3 max-sm:-right-2">
+                  <div className="h-10 w-10 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center text-lg">
+                    🛡️
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-900">Verifikasi KTP</h4>
+                    <p className="text-[10px] text-slate-500 mt-0.5">Pekerja & UMKM terpercaya</p>
+                  </div>
+                </div>
+
+                {/* Floating Card 3: Tanpa Biaya Komisi */}
+                <div className="absolute -bottom-5 left-10 bg-white border border-slate-200/80 rounded-2xl p-3.5 shadow-lg flex items-center gap-3 max-sm:left-2">
+                  <div className="h-10 w-10 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center text-lg">
+                    ⚡
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-900">Tanpa Biaya Komisi</h4>
+                    <p className="text-[10px] text-slate-500 mt-0.5">100% Upah milik pekerja</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
