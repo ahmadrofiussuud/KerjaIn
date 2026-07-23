@@ -182,53 +182,18 @@ export default function LandingPage() {
     <div className="flex min-h-screen flex-col bg-white text-slate-900 overflow-x-hidden">
       <PublicNavbar />
 
-      {/* ─── HERO / BERANDA ─────────────────────────────────────── */}
-      <section id="beranda" className="relative min-h-[95vh] flex items-center justify-center overflow-hidden bg-slate-950">
-        
-        {/* Fullscreen Parallax Background */}
-        <div className="absolute inset-0 w-full h-full z-0">
-          <ScrollFramePlayer frameCount={100} scrollMode="viewport" className="w-full h-full border-0 rounded-none bg-slate-950" />
-          {/* High contrast overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-slate-950/20 to-slate-950/80 pointer-events-none" />
-        </div>
-
-        {/* Floating Cards (positioned strategically, hidden on mobile for clean style) */}
-        <div className="absolute inset-0 z-10 pointer-events-none hidden md:block max-w-7xl mx-auto px-8">
-          {/* Floating Card 1: Gaji Harian */}
-          <div className="absolute top-[22%] left-[8%] bg-slate-900/85 backdrop-blur-md border border-slate-700/50 rounded-2xl p-3.5 shadow-xl flex items-center gap-3 animate-bounce-slow">
-            <div className="h-10 w-10 rounded-xl bg-emerald-950/80 border border-emerald-500/30 flex items-center justify-center text-lg">
-              💰
-            </div>
-            <div>
-              <h4 className="text-xs font-bold text-white">Gaji Harian Cair</h4>
-              <p className="text-[10px] text-slate-300 mt-0.5">Dana aman & cepat cair</p>
-            </div>
+      {/* ─── HERO / BERANDA (PINNED / STICKY PARALLAX) ────────────────── */}
+      <div id="beranda-wrapper" className="relative sticky-scroll-wrapper h-[220vh] bg-slate-950">
+        <section id="beranda" className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-slate-950 z-10">
+          
+          {/* Fullscreen Parallax Background */}
+          <div className="absolute inset-0 w-full h-full z-0">
+            <ScrollFramePlayer frameCount={100} scrollMode="sticky" className="w-full h-full border-0 rounded-none bg-slate-950" />
+            {/* High contrast overlay for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-slate-950/20 to-slate-950/80 pointer-events-none" />
           </div>
 
-          {/* Floating Card 2: Verifikasi KTP */}
-          <div className="absolute top-[45%] right-[8%] bg-slate-900/85 backdrop-blur-md border border-slate-700/50 rounded-2xl p-3.5 shadow-xl flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-sky-950/80 border border-sky-500/30 flex items-center justify-center text-lg">
-              🛡️
-            </div>
-            <div>
-              <h4 className="text-xs font-bold text-white">Verifikasi KTP</h4>
-              <p className="text-[10px] text-slate-300 mt-0.5">Pekerja & UMKM terpercaya</p>
-            </div>
-          </div>
-
-          {/* Floating Card 3: Tanpa Biaya Komisi */}
-          <div className="absolute bottom-[20%] left-[12%] bg-slate-900/85 backdrop-blur-md border border-slate-700/50 rounded-2xl p-3.5 shadow-xl flex items-center gap-3 animate-bounce-slow" style={{ animationDelay: "1s" }}>
-            <div className="h-10 w-10 rounded-xl bg-amber-950/80 border border-amber-500/30 flex items-center justify-center text-lg">
-              ⚡
-            </div>
-            <div>
-              <h4 className="text-xs font-bold text-white">Tanpa Biaya Komisi</h4>
-              <p className="text-[10px] text-slate-300 mt-0.5">100% Upah milik pekerja</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Content Overlay */}
+          {/* Content Overlay */}
         <div className="relative z-20 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-28 flex flex-col items-center text-center">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-950/80 border border-sky-500/40 text-sky-300 text-xs font-bold mb-8 shadow-lg shadow-sky-950/50 backdrop-blur-md">
@@ -288,6 +253,7 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+    </div>
 
       {/* ─── TENTANG KAMI ────────────────────────────────────────── */}
       <section id="tentang" className="py-20 lg:py-28 bg-slate-50 border-y border-slate-200/60">

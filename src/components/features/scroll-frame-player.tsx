@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 interface ScrollFramePlayerProps {
   frameCount?: number;
   className?: string;
-  scrollMode?: "viewport" | "element";
+  scrollMode?: "viewport" | "element" | "sticky";
 }
 
 export function ScrollFramePlayer({ frameCount = 100, className, scrollMode = "viewport" }: ScrollFramePlayerProps) {
@@ -114,6 +114,26 @@ export function ScrollFramePlayer({ frameCount = 100, className, scrollMode = "v
   // Monitor scroll position
   useEffect(() => {
     const handleScroll = () => {
+      if (scrollMode === "sticky") {
+        const container = containerRef.current;
+        if (!container) return;
+
+        // Try to find the closest wrapper element
+        const parent = container.closest(".sticky-scroll-wrapper") || container.parentElement;
+        if (!parent) return;
+
+        const rect = parent.getBoundingClientRect();
+        const scrolled = -rect.top;
+        const totalScrollable = rect.height - window.innerHeight;
+
+        if (totalScrollable <= 0) return;
+
+        let fraction = scrolled / totalScrollable;
+        fraction = Math.max(0, Math.min(1, fraction));
+        scrollFractionRef.current = fraction;
+        return;
+      }
+
       if (scrollMode === "viewport") {
         const scrollY = window.scrollY;
         // Animation completes after scrolling 80% of window height for a good feel
