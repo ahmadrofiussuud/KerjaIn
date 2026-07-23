@@ -6,9 +6,10 @@ import { cn } from "@/lib/utils";
 interface ScrollFramePlayerProps {
   frameCount?: number;
   className?: string;
+  scrollMode?: "viewport" | "element";
 }
 
-export function ScrollFramePlayer({ frameCount = 100, className }: ScrollFramePlayerProps) {
+export function ScrollFramePlayer({ frameCount = 100, className, scrollMode = "viewport" }: ScrollFramePlayerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
@@ -113,6 +114,16 @@ export function ScrollFramePlayer({ frameCount = 100, className }: ScrollFramePl
   // Monitor scroll position
   useEffect(() => {
     const handleScroll = () => {
+      if (scrollMode === "viewport") {
+        const scrollY = window.scrollY;
+        // Animation completes after scrolling 80% of window height for a good feel
+        const scrollRange = window.innerHeight * 0.8;
+        let fraction = scrollY / scrollRange;
+        fraction = Math.max(0, Math.min(1, fraction));
+        scrollFractionRef.current = fraction;
+        return;
+      }
+
       const container = containerRef.current;
       if (!container) return;
 
@@ -155,7 +166,7 @@ export function ScrollFramePlayer({ frameCount = 100, className }: ScrollFramePl
       window.removeEventListener("scroll", handleScroll);
       resizeObserver.disconnect();
     };
-  }, []);
+  }, [scrollMode]);
 
   return (
     <div

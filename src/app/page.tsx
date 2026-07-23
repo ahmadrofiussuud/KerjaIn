@@ -183,119 +183,108 @@ export default function LandingPage() {
       <PublicNavbar />
 
       {/* ─── HERO / BERANDA ─────────────────────────────────────── */}
-      <section id="beranda" className="relative overflow-hidden pt-16 pb-24 lg:pt-24 lg:pb-32">
-        {/* Background gradient blobs */}
-        <div className="absolute -top-32 -left-32 w-[600px] h-[600px] bg-sky-100/60 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-24 -right-24 w-[400px] h-[400px] bg-cyan-100/60 rounded-full blur-3xl pointer-events-none" />
+      <section id="beranda" className="relative min-h-[95vh] flex items-center justify-center overflow-hidden bg-slate-950">
+        
+        {/* Fullscreen Parallax Background */}
+        <div className="absolute inset-0 w-full h-full z-0">
+          <ScrollFramePlayer frameCount={100} scrollMode="viewport" className="w-full h-full border-0 rounded-none bg-slate-950" />
+          {/* High contrast overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-slate-950/20 to-slate-950/80 pointer-events-none" />
+        </div>
 
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-
-            {/* Left: Copy */}
-            <div className="space-y-8 flex flex-col items-center lg:items-start text-center lg:text-left">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-bold">
-                <span className="h-2 w-2 rounded-full bg-sky-500 animate-pulse" />
-                Platform Kerja Informal Terpercaya #1 Indonesia
-              </div>
-
-              <h1 className="text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] text-slate-900 w-full">
-                Cari Kerja Harian &{" "}
-                <span className="bg-gradient-to-r from-sky-600 via-sky-500 to-cyan-500 bg-clip-text text-transparent">
-                  Sampingan
-                </span>{" "}
-                Lebih Mudah
-              </h1>
-
-              <p className="text-lg text-slate-600 leading-relaxed max-w-lg">
-                KerjaIn menghubungkan pekerja informal dengan UMKM lokal secara instan. 
-                Tanpa CV berlembar-lembar, tanpa perantara, tanpa biaya pendaftaran.
-              </p>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-wrap justify-center lg:justify-start gap-4 w-full">
-                <a
-                  href="#lowongan"
-                  className="px-7 py-3.5 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl shadow-lg shadow-sky-200 hover:shadow-xl hover:shadow-sky-200 hover:-translate-y-0.5 transition-all text-sm"
-                >
-                  Lihat Lowongan Kerja →
-                </a>
-                <Link
-                  href="/register"
-                  className="px-7 py-3.5 bg-white border-2 border-slate-200 hover:border-sky-300 text-slate-800 font-bold rounded-xl hover:shadow-md transition-all text-sm"
-                >
-                  Daftar Gratis Sekarang
-                </Link>
-              </div>
-
-              {/* Trust badges */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs font-semibold text-slate-500 w-full">
-                <span className="flex items-center gap-1.5">
-                  <svg className="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                  </svg>
-                  100% Gratis untuk Pelamar
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <svg className="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                  </svg>
-                  Tanpa Biaya Komisi
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <svg className="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                  </svg>
-                  Gaji Harian Transparan
-                </span>
-              </div>
+        {/* Floating Cards (positioned strategically, hidden on mobile for clean style) */}
+        <div className="absolute inset-0 z-10 pointer-events-none hidden md:block max-w-7xl mx-auto px-8">
+          {/* Floating Card 1: Gaji Harian */}
+          <div className="absolute top-[22%] left-[8%] bg-slate-900/85 backdrop-blur-md border border-slate-700/50 rounded-2xl p-3.5 shadow-xl flex items-center gap-3 animate-bounce-slow">
+            <div className="h-10 w-10 rounded-xl bg-emerald-950/80 border border-emerald-500/30 flex items-center justify-center text-lg">
+              💰
             </div>
-
-            {/* Right: Premium Mockup Image like MandorIn */}
-            <div className="relative flex justify-center lg:justify-end items-center max-lg:mt-12">
-              <div className="relative w-full max-w-md lg:max-w-none aspect-square bg-slate-50 border border-slate-200/80 rounded-3xl p-6 shadow-xl shadow-slate-100 flex items-center justify-center overflow-visible">
-                
-                {/* Main Parallax Scroll Frame Player */}
-                <div className="relative w-full h-full rounded-2xl overflow-hidden border border-slate-200/50 bg-slate-900">
-                  <ScrollFramePlayer frameCount={100} className="border-0 shadow-none rounded-none" />
-                  {/* Subtle overlay gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 via-transparent to-transparent pointer-events-none" />
-                </div>
-
-                {/* Floating Card 1: Gaji Harian Cair */}
-                <div className="absolute -top-5 -left-5 bg-white border border-slate-200/80 rounded-2xl p-3.5 shadow-lg flex items-center gap-3 animate-bounce-slow max-sm:-left-2">
-                  <div className="h-10 w-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-lg">
-                    💰
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-bold text-slate-900">Gaji Harian Cair</h4>
-                    <p className="text-[10px] text-slate-500 mt-0.5">Dana aman & cepat cair</p>
-                  </div>
-                </div>
-
-                {/* Floating Card 2: Verifikasi KTP */}
-                <div className="absolute top-1/2 -right-8 -translate-y-1/2 bg-white border border-slate-200/80 rounded-2xl p-3.5 shadow-lg flex items-center gap-3 max-sm:-right-2">
-                  <div className="h-10 w-10 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center text-lg">
-                    🛡️
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-bold text-slate-900">Verifikasi KTP</h4>
-                    <p className="text-[10px] text-slate-500 mt-0.5">Pekerja & UMKM terpercaya</p>
-                  </div>
-                </div>
-
-                {/* Floating Card 3: Tanpa Biaya Komisi */}
-                <div className="absolute -bottom-5 left-10 bg-white border border-slate-200/80 rounded-2xl p-3.5 shadow-lg flex items-center gap-3 max-sm:left-2">
-                  <div className="h-10 w-10 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center text-lg">
-                    ⚡
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-bold text-slate-900">Tanpa Biaya Komisi</h4>
-                    <p className="text-[10px] text-slate-500 mt-0.5">100% Upah milik pekerja</p>
-                  </div>
-                </div>
-              </div>
+            <div>
+              <h4 className="text-xs font-bold text-white">Gaji Harian Cair</h4>
+              <p className="text-[10px] text-slate-300 mt-0.5">Dana aman & cepat cair</p>
             </div>
+          </div>
+
+          {/* Floating Card 2: Verifikasi KTP */}
+          <div className="absolute top-[45%] right-[8%] bg-slate-900/85 backdrop-blur-md border border-slate-700/50 rounded-2xl p-3.5 shadow-xl flex items-center gap-3">
+            <div className="h-10 w-10 rounded-xl bg-sky-950/80 border border-sky-500/30 flex items-center justify-center text-lg">
+              🛡️
+            </div>
+            <div>
+              <h4 className="text-xs font-bold text-white">Verifikasi KTP</h4>
+              <p className="text-[10px] text-slate-300 mt-0.5">Pekerja & UMKM terpercaya</p>
+            </div>
+          </div>
+
+          {/* Floating Card 3: Tanpa Biaya Komisi */}
+          <div className="absolute bottom-[20%] left-[12%] bg-slate-900/85 backdrop-blur-md border border-slate-700/50 rounded-2xl p-3.5 shadow-xl flex items-center gap-3 animate-bounce-slow" style={{ animationDelay: "1s" }}>
+            <div className="h-10 w-10 rounded-xl bg-amber-950/80 border border-amber-500/30 flex items-center justify-center text-lg">
+              ⚡
+            </div>
+            <div>
+              <h4 className="text-xs font-bold text-white">Tanpa Biaya Komisi</h4>
+              <p className="text-[10px] text-slate-300 mt-0.5">100% Upah milik pekerja</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Content Overlay */}
+        <div className="relative z-20 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-28 flex flex-col items-center text-center">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-950/80 border border-sky-500/40 text-sky-300 text-xs font-bold mb-8 shadow-lg shadow-sky-950/50 backdrop-blur-md">
+            <span className="h-2 w-2 rounded-full bg-sky-400 animate-pulse" />
+            Platform Kerja Informal Terpercaya #1 Indonesia
+          </div>
+
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.05] text-white max-w-3xl drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)]">
+            Cari Kerja Harian &{" "}
+            <span className="bg-gradient-to-r from-sky-400 via-sky-300 to-cyan-400 bg-clip-text text-transparent">
+              Sampingan
+            </span>{" "}
+            Lebih Mudah
+          </h1>
+
+          <p className="text-lg sm:text-xl text-slate-200 leading-relaxed max-w-2xl mt-6 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] font-medium">
+            KerjaIn menghubungkan pekerja informal dengan UMKM lokal secara instan. 
+            Tanpa CV berlembar-lembar, tanpa perantara, tanpa biaya pendaftaran.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap justify-center gap-4 w-full mt-10">
+            <a
+              href="#lowongan"
+              className="px-8 py-4 bg-sky-500 hover:bg-sky-400 text-white font-extrabold rounded-2xl shadow-lg shadow-sky-950/50 hover:shadow-xl hover:shadow-sky-500/20 hover:-translate-y-0.5 transition-all text-sm tracking-wider uppercase cursor-pointer"
+            >
+              Lihat Lowongan Kerja →
+            </a>
+            <Link
+              href="/register"
+              className="px-8 py-4 bg-slate-900/90 border border-slate-700/80 hover:border-sky-500 text-white font-extrabold rounded-2xl hover:bg-slate-950 transition-all text-sm tracking-wider uppercase backdrop-blur-sm"
+            >
+              Daftar Gratis Sekarang
+            </Link>
+          </div>
+
+          {/* Trust badges */}
+          <div className="flex flex-wrap items-center justify-center gap-6 mt-12 text-xs font-bold text-slate-200 w-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] bg-slate-950/50 py-3.5 px-6 rounded-2xl border border-slate-800/40 backdrop-blur-sm max-w-2xl">
+            <span className="flex items-center gap-1.5">
+              <svg className="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+              </svg>
+              100% Gratis untuk Pelamar
+            </span>
+            <span className="flex items-center gap-1.5">
+              <svg className="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+              </svg>
+              Tanpa Biaya Komisi
+            </span>
+            <span className="flex items-center gap-1.5">
+              <svg className="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+              </svg>
+              Gaji Harian Transparan
+            </span>
           </div>
         </div>
       </section>
