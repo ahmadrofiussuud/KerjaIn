@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { PublicNavbar } from "@/components/layout/public-navbar";
 import { Footer } from "@/components/layout/footer";
 import { cn } from "@/lib/utils";
+import { ScrollFramePlayer } from "@/components/features/scroll-frame-player";
 
 // Preview jobs for landing page (hanya sebagai teaser)
 const previewJobs = [
@@ -254,13 +255,9 @@ export default function LandingPage() {
             <div className="relative flex justify-center lg:justify-end items-center max-lg:mt-12">
               <div className="relative w-full max-w-md lg:max-w-none aspect-square bg-slate-50 border border-slate-200/80 rounded-3xl p-6 shadow-xl shadow-slate-100 flex items-center justify-center overflow-visible">
                 
-                {/* Main Job Illustration */}
-                <div className="relative w-full h-full rounded-2xl overflow-hidden border border-slate-200/50 bg-white">
-                  <img
-                    src="/hero_kerjain.png"
-                    alt="KerjaIn Kolaborasi Pekerja & UMKM"
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                  />
+                {/* Main Parallax Scroll Frame Player */}
+                <div className="relative w-full h-full rounded-2xl overflow-hidden border border-slate-200/50 bg-slate-900">
+                  <ScrollFramePlayer frameCount={100} className="border-0 shadow-none rounded-none" />
                   {/* Subtle overlay gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 via-transparent to-transparent pointer-events-none" />
                 </div>
