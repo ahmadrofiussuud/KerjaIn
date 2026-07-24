@@ -60,7 +60,7 @@ export function TestimonialsCarousel() {
   const current = testimonialsData[activeIdx];
 
   return (
-    <section className="py-24 lg:py-32 bg-white border-t border-slate-200/60">
+    <section className="py-12 lg:py-16 bg-white border-t border-slate-200/60">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 space-y-10">
         {/* Header Label (WHAT THEY SAY wireframe style) */}
         <div className="text-center space-y-2">

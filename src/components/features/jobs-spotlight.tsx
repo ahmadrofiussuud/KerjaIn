@@ -36,7 +36,7 @@ export function JobsSpotlight({ jobs, onJobClick }: JobsSpotlightProps) {
   const currentJob = jobs[activeIdx];
 
   return (
-    <section id="lowongan" className="py-24 lg:py-32 bg-white">
+    <section id="lowongan" className="py-12 lg:py-16 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Main Container */}
         <div className="relative bg-[#f1f5f9] rounded-3xl p-6 sm:p-10 lg:p-14 overflow-hidden border border-slate-200/90 shadow-sm">

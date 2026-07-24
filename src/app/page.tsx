@@ -200,7 +200,7 @@ export default function LandingPage() {
       <HeroSection />
 
       {/* ─── TENTANG KAMI ────────────────────────────────────────── */}
-      <section id="tentang" className="py-24 lg:py-32 bg-[#f0f4f8]">
+      <section id="tentang" className="py-12 lg:py-16 bg-[#f0f4f8]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
@@ -322,8 +322,8 @@ export default function LandingPage() {
       <FeaturesOrbit />
 
       {/* ─── CARA KERJA ──────────────────────────────────────────── */}
-      <section id="cara-kerja" className="py-20 lg:py-28 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-16">
+      <section id="cara-kerja" className="py-12 lg:py-16 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="text-center space-y-3 max-w-2xl mx-auto">
             <div className="inline-flex px-3 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-bold">
               Cara Kerja
@@ -387,7 +387,7 @@ export default function LandingPage() {
       <TestimonialsCarousel />
 
       {/* ─── FINAL CTA ───────────────────────────────────────────── */}
-      <section className="py-20 bg-slate-900 text-white relative overflow-hidden">
+      <section className="py-14 lg:py-18 bg-slate-900 text-white relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center space-y-6">
           <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tight">

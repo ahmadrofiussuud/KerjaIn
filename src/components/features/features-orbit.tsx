@@ -146,7 +146,7 @@ export function FeaturesOrbit() {
   const color = C[feat.color];
 
   return (
-    <section id="fitur" className="py-20 lg:py-28 bg-gradient-to-b from-white to-slate-50 overflow-hidden">
+    <section id="fitur" className="py-12 lg:py-16 bg-gradient-to-b from-white to-slate-50 overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
