@@ -55,9 +55,13 @@ export const ScrollFramePlayer = forwardRef<
   useEffect(() => {
     const loop = () => {
       const diff = targetRef.current - currentRef.current;
-      if (Math.abs(diff) > 0.0002) {
-        currentRef.current += diff * 0.10;
+      if (Math.abs(diff) > 0.0001) {
+        currentRef.current += diff * 0.22;
         drawFrame(currentRef.current);
+        if (canvasRef.current) {
+          const scale = 1 + currentRef.current * 0.25;
+          canvasRef.current.style.transform = `scale(${scale})`;
+        }
       }
       rafRef.current = requestAnimationFrame(loop);
     };

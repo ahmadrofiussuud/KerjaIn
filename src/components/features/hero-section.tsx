@@ -53,7 +53,7 @@ export function HeroSection() {
     const onTouchMove = (e: TouchEvent) => {
       if (!lockedRef.current) return;
       e.preventDefault();
-      advance((touchY - e.touches[0].clientY) * 0.003);
+      advance((touchY - e.touches[0].clientY) * 0.008);
       touchY = e.touches[0].clientY;
     };
 
