@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
+import { Icon } from "@/components/ui/icon";
 
 // ─── Types ──────────────────────────────────────────────────────
 type Role = "applicant" | "recruiter";
@@ -60,7 +61,7 @@ function RecruiterDashboard({ name }: { name: string }) {
           <div className="flex items-start justify-between gap-4 flex-wrap">
             <div>
               <p className="text-sm text-slate-500 font-medium mb-1">Selamat datang kembali,</p>
-              <h1 className="text-2xl font-extrabold text-slate-900">{name} 👋</h1>
+              <h1 className="text-2xl font-extrabold text-slate-900">Selamat datang, {name}</h1>
               <p className="text-sm text-slate-500 mt-1">Kelola lowongan dan temukan staf terbaik untuk bisnis Anda.</p>
             </div>
             <Link
@@ -163,17 +164,17 @@ function RecruiterDashboard({ name }: { name: string }) {
           <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Aksi Cepat</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {[
-              { label: "Pasang Lowongan", href: "/post-job", icon: "📋", color: "hover:border-cyan-200 hover:bg-cyan-50" },
-              { label: "Kelola Lamaran", href: "/manage-jobs", icon: "👥", color: "hover:border-sky-200 hover:bg-sky-50" },
-              { label: "Profil Perusahaan", href: "/profile", icon: "🏢", color: "hover:border-slate-300 hover:bg-slate-50" },
-              { label: "Pengaturan", href: "/settings", icon: "⚙️", color: "hover:border-slate-300 hover:bg-slate-50" },
+              { label: "Pasang Lowongan", href: "/post-job",       icon: "post_add",      iconColor: "text-cyan-600",  color: "hover:border-cyan-200 hover:bg-cyan-50" },
+              { label: "Kelola Lamaran",  href: "/manage-jobs",    icon: "group",         iconColor: "text-sky-600",   color: "hover:border-sky-200 hover:bg-sky-50" },
+              { label: "Profil Perusahaan",href: "/profile",       icon: "business",      iconColor: "text-slate-600", color: "hover:border-slate-300 hover:bg-slate-50" },
+              { label: "Pengaturan",      href: "/settings",       icon: "settings",      iconColor: "text-slate-600", color: "hover:border-slate-300 hover:bg-slate-50" },
             ].map((action) => (
               <Link key={action.href} href={action.href}
                 className={cn(
                   "flex items-center gap-3 p-4 bg-white border border-slate-200 rounded-xl transition-all",
                   action.color
                 )}>
-                <span className="text-xl shrink-0">{action.icon}</span>
+                <Icon name={action.icon} size={22} className={cn("shrink-0", action.iconColor)} />
                 <span className="text-sm font-bold text-slate-700">{action.label}</span>
               </Link>
             ))}
@@ -194,7 +195,7 @@ function ApplicantDashboard({ name }: { name: string }) {
           <div className="flex items-start justify-between gap-4 flex-wrap">
             <div>
               <p className="text-sm text-slate-500 font-medium mb-1">Selamat datang kembali,</p>
-              <h1 className="text-2xl font-extrabold text-slate-900">{name} 👋</h1>
+              <h1 className="text-2xl font-extrabold text-slate-900">Selamat datang, {name}</h1>
               <p className="text-sm text-slate-500 mt-1">Temukan pekerjaan harian & sampingan yang sesuai dengan Anda.</p>
             </div>
             <Link
@@ -308,17 +309,17 @@ function ApplicantDashboard({ name }: { name: string }) {
           <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Aksi Cepat</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {[
-              { label: "Cari Lowongan", href: "/jobs", icon: "🔍", color: "hover:border-sky-200 hover:bg-sky-50" },
-              { label: "Lamaran Saya", href: "/applications", icon: "📋", color: "hover:border-sky-200 hover:bg-sky-50" },
-              { label: "Edit Profil", href: "/profile", icon: "👤", color: "hover:border-slate-300 hover:bg-slate-50" },
-              { label: "Pengaturan", href: "/settings", icon: "⚙️", color: "hover:border-slate-300 hover:bg-slate-50" },
+              { label: "Cari Lowongan",  href: "/jobs",         icon: "search",        iconColor: "text-sky-600",   color: "hover:border-sky-200 hover:bg-sky-50" },
+              { label: "Lamaran Saya",   href: "/applications", icon: "description",   iconColor: "text-sky-600",   color: "hover:border-sky-200 hover:bg-sky-50" },
+              { label: "Edit Profil",    href: "/profile",      icon: "manage_accounts",iconColor: "text-slate-600", color: "hover:border-slate-300 hover:bg-slate-50" },
+              { label: "Pengaturan",     href: "/settings",     icon: "settings",      iconColor: "text-slate-600", color: "hover:border-slate-300 hover:bg-slate-50" },
             ].map((action) => (
               <Link key={action.href} href={action.href}
                 className={cn(
                   "flex items-center gap-3 p-4 bg-white border border-slate-200 rounded-xl transition-all",
                   action.color
                 )}>
-                <span className="text-xl shrink-0">{action.icon}</span>
+                <Icon name={action.icon} size={22} className={cn("shrink-0", action.iconColor)} />
                 <span className="text-sm font-bold text-slate-700">{action.label}</span>
               </Link>
             ))}

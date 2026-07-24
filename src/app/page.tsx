@@ -1,12 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { PublicNavbar } from "@/components/layout/public-navbar";
 import { Footer } from "@/components/layout/footer";
 import { cn } from "@/lib/utils";
-import { ScrollFramePlayer } from "@/components/features/scroll-frame-player";
+import { HeroSection } from "@/components/features/hero-section";
+import { Icon } from "@/components/ui/icon";
+import { FeaturesOrbit } from "@/components/features/features-orbit";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { JobsSpotlight } from "@/components/features/jobs-spotlight";
+import { TestimonialsCarousel } from "@/components/features/testimonials-carousel";
 
 // Preview jobs for landing page (hanya sebagai teaser)
 const previewJobs = [
@@ -18,8 +23,8 @@ const previewJobs = [
     salary: "Rp 150.000 - 200.000/hari",
     type: "Harian",
     is_urgent: true,
-    cover: "/barista_cover_1782741796312.png",
-    companyInitials: "KK",
+    cover: "/barista_realistic.png",
+    logo: "/logo_kopi_kenangan.png",
     companyColor: "bg-amber-600",
     description: "Dibutuhkan barista berpengalaman untuk kafe premium di area Sudirman. Jam kerja fleksibel, lingkungan kerja modern.",
   },
@@ -31,8 +36,8 @@ const previewJobs = [
     salary: "Rp 3.500.000/bulan",
     type: "Shift",
     is_urgent: false,
-    cover: "/cashier_cover_1782741807800.png",
-    companyInitials: "TM",
+    cover: "/cashier_realistic.png",
+    logo: "/logo_toko_makmur.png",
     companyColor: "bg-indigo-600",
     description: "Dibutuhkan kasir untuk toko swalayan lokal shift malam (22:00-06:00). Diutamakan jujur, ramah, dan teliti.",
   },
@@ -44,8 +49,8 @@ const previewJobs = [
     salary: "Rp 120.000 - 180.000/hari",
     type: "Harian",
     is_urgent: true,
-    cover: "/courier_cover_1782741835656.png",
-    companyInitials: "EK",
+    cover: "/courier_realistic.png",
+    logo: "/logo_express_kurir.png",
     companyColor: "bg-teal-600",
     description: "Dicari kurir motor harian untuk pengantaran paket logistik area Jabodetabek. Wajib memiliki SIM C aktif.",
   },
@@ -57,8 +62,8 @@ const previewJobs = [
     salary: "Rp 3.200.000/bulan",
     type: "Shift",
     is_urgent: false,
-    cover: "/warehouse_cover_1782741851815.png",
-    companyInitials: "GR",
+    cover: "/warehouse_realistic.png",
+    logo: "/logo_gudang_raya.png",
     companyColor: "bg-slate-500",
     description: "Membantu operasional gudang, packing barang, loading/unloading, dan pencatatan stock opname shift pagi.",
   },
@@ -70,8 +75,8 @@ const previewJobs = [
     salary: "Rp 4.000.000 - 5.000.000/bulan",
     type: "Full-time",
     is_urgent: false,
-    cover: "/office_cover_1782741819514.png",
-    companyInitials: "LN",
+    cover: "/office_realistic.png",
+    logo: "/logo_logistik_nusantara.png",
     companyColor: "bg-sky-600",
     description: "Mengelola administrasi pengiriman, menjawab pertanyaan customer via WhatsApp chat secara ramah dan profesional.",
   },
@@ -83,8 +88,8 @@ const previewJobs = [
     salary: "Rp 170.000/hari",
     type: "Harian",
     is_urgent: true,
-    cover: "/cooking_cover_1782741864976.png",
-    companyInitials: "WB",
+    cover: "/cooking_realistic.png",
+    logo: "/logo_warteg_bahari.png",
     companyColor: "bg-emerald-600",
     description: "Mencari juru masak berpengalaman untuk warteg sibuk. Mampu memasak masakan rumah dengan rasa yang konsisten.",
   },
@@ -163,6 +168,15 @@ export default function LandingPage() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const router = useRouter();
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+      }
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
   const handleJobClick = () => {
     setShowLoginModal(true);
   };
@@ -182,128 +196,130 @@ export default function LandingPage() {
     <div className="flex min-h-screen flex-col bg-white text-slate-900 overflow-x-hidden">
       <PublicNavbar />
 
-      {/* ─── HERO / BERANDA (PINNED / STICKY PARALLAX) ────────────────── */}
-      <div id="beranda-wrapper" className="relative sticky-scroll-wrapper h-[220vh] bg-slate-950">
-        <section id="beranda" className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-slate-950 z-10">
-          
-          {/* Fullscreen Parallax Background */}
-          <div className="absolute inset-0 w-full h-full z-0">
-            <ScrollFramePlayer frameCount={100} scrollMode="sticky" className="w-full h-full border-0 rounded-none bg-slate-950" />
-            {/* High contrast overlay for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-slate-950/20 to-slate-950/80 pointer-events-none" />
-          </div>
-
-          {/* Content Overlay */}
-        <div className="relative z-20 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-28 flex flex-col items-center text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-950/80 border border-sky-500/40 text-sky-300 text-xs font-bold mb-8 shadow-lg shadow-sky-950/50 backdrop-blur-md">
-            <span className="h-2 w-2 rounded-full bg-sky-400 animate-pulse" />
-            Platform Kerja Informal Terpercaya #1 Indonesia
-          </div>
-
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.05] text-white max-w-3xl drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)]">
-            Cari Kerja Harian &{" "}
-            <span className="bg-gradient-to-r from-sky-400 via-sky-300 to-cyan-400 bg-clip-text text-transparent">
-              Sampingan
-            </span>{" "}
-            Lebih Mudah
-          </h1>
-
-          <p className="text-lg sm:text-xl text-slate-200 leading-relaxed max-w-2xl mt-6 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] font-medium">
-            KerjaIn menghubungkan pekerja informal dengan UMKM lokal secara instan. 
-            Tanpa CV berlembar-lembar, tanpa perantara, tanpa biaya pendaftaran.
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-wrap justify-center gap-4 w-full mt-10">
-            <a
-              href="#lowongan"
-              className="px-8 py-4 bg-sky-500 hover:bg-sky-400 text-white font-extrabold rounded-2xl shadow-lg shadow-sky-950/50 hover:shadow-xl hover:shadow-sky-500/20 hover:-translate-y-0.5 transition-all text-sm tracking-wider uppercase cursor-pointer"
-            >
-              Lihat Lowongan Kerja →
-            </a>
-            <Link
-              href="/register"
-              className="px-8 py-4 bg-slate-900/90 border border-slate-700/80 hover:border-sky-500 text-white font-extrabold rounded-2xl hover:bg-slate-950 transition-all text-sm tracking-wider uppercase backdrop-blur-sm"
-            >
-              Daftar Gratis Sekarang
-            </Link>
-          </div>
-
-          {/* Trust badges */}
-          <div className="flex flex-wrap items-center justify-center gap-6 mt-12 text-xs font-bold text-slate-200 w-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] bg-slate-950/50 py-3.5 px-6 rounded-2xl border border-slate-800/40 backdrop-blur-sm max-w-2xl">
-            <span className="flex items-center gap-1.5">
-              <svg className="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-              </svg>
-              100% Gratis untuk Pelamar
-            </span>
-            <span className="flex items-center gap-1.5">
-              <svg className="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-              </svg>
-              Tanpa Biaya Komisi
-            </span>
-            <span className="flex items-center gap-1.5">
-              <svg className="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-              </svg>
-              Gaji Harian Transparan
-            </span>
-          </div>
-        </div>
-      </section>
-    </div>
+      {/* ─── HERO / BERANDA ─────────────────────────────────────── */}
+      <HeroSection />
 
       {/* ─── TENTANG KAMI ────────────────────────────────────────── */}
-      <section id="tentang" className="py-20 lg:py-28 bg-slate-50 border-y border-slate-200/60">
+      <section id="tentang" className="py-24 lg:py-32 bg-[#f0f4f8]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-6">
-              <div className="inline-flex px-3 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-bold">
-                Tentang KerjaIn
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+
+            {/* LEFT: Text card */}
+            <div className="lg:col-span-7 bg-white border border-slate-200/80 rounded-3xl p-8 sm:p-10 lg:p-12 shadow-sm space-y-6">
+              <div className="space-y-2">
+                <p className="text-xs font-extrabold text-slate-400 uppercase tracking-widest">Tentang Kami</p>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
+                  Platform Kerja Informal<br />
+                  <span className="text-sky-600">Paling Terpercaya</span> di Indonesia
+                </h2>
               </div>
-              <h2 className="text-4xl font-extrabold text-slate-900 leading-tight">
-                Kami Hadir untuk <span className="text-sky-600">Menyederhanakan</span> Rekrutmen Informal
-              </h2>
-              <p className="text-slate-600 leading-relaxed">
+
+              <p className="text-slate-600 text-base leading-relaxed">
                 KerjaIn lahir dari keresahan nyata — ribuan UMKM kesulitan mencari staf harian yang terpercaya, 
                 sementara jutaan pekerja informal tidak punya platform yang tepat untuk menemukan pekerjaan bermartabat.
               </p>
-              <p className="text-slate-600 leading-relaxed">
+              <p className="text-slate-600 text-base leading-relaxed">
                 Kami membangun jembatan digital yang menghubungkan keduanya secara langsung, transparan, 
                 dan tanpa birokrasi. Tidak ada komisi tersembunyi, tidak ada perantara berbelit.
               </p>
-              <div className="flex flex-wrap gap-3 pt-2">
-                <Link href="/register" className="px-5 py-2.5 bg-sky-600 hover:bg-sky-500 text-white text-sm font-bold rounded-xl transition-all">
-                  Mulai Perjalanan Anda
+
+              {/* Stats row */}
+              <div className="grid grid-cols-3 gap-6 pt-4 border-t border-slate-100">
+                {[
+                  { value: "50K+",  label: "Pekerja Terdaftar" },
+                  { value: "8K+",   label: "UMKM Mitra" },
+                  { value: "50+",   label: "Kota di Indonesia" },
+                ].map((s) => (
+                  <div key={s.label} className="text-center sm:text-left">
+                    <p className="text-3xl sm:text-4xl font-black text-sky-600 tracking-tight">{s.value}</p>
+                    <p className="text-xs text-slate-500 font-semibold mt-1 leading-snug">{s.label}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-4 pt-2">
+                <Link href="/register" className="px-7 py-3.5 bg-sky-600 hover:bg-sky-500 text-white text-sm font-bold rounded-xl transition-all shadow-md hover:-translate-y-0.5 hover:shadow-lg">
+                  Mulai Sekarang
                 </Link>
-                <a href="#cara-kerja" className="px-5 py-2.5 border border-slate-200 hover:border-slate-300 text-slate-700 text-sm font-bold rounded-xl transition-all">
+                <a href="#cara-kerja" className="px-7 py-3.5 border border-slate-200 hover:border-slate-300 bg-slate-50 hover:bg-white text-slate-700 text-sm font-bold rounded-xl transition-all">
                   Lihat Cara Kerjanya
                 </a>
               </div>
             </div>
 
-            {/* Feature list */}
-            <div className="space-y-4">
-              {[
-                { icon: "⚡", title: "Proses Cepat", desc: "Dari daftar hingga dapat kerja bisa selesai dalam 2 jam." },
-                { icon: "🔒", title: "Terverifikasi & Aman", desc: "Setiap pelamar dan UMKM diverifikasi identitasnya untuk keamanan bersama." },
-                { icon: "💬", title: "Komunikasi Langsung", desc: "Tidak ada perantara. Perekrut dan pelamar berinteraksi langsung via WhatsApp." },
-                { icon: "💰", title: "Gaji Transparan", desc: "Nominal upah selalu ditampilkan jelas. Tidak ada manipulasi atau pemotongan tersembunyi." },
-              ].map((item, i) => (
-                <div key={i} className="flex gap-4 p-5 bg-white rounded-2xl border border-slate-200 hover:border-sky-200 hover:shadow-sm transition-all">
-                  <div className="text-2xl shrink-0">{item.icon}</div>
+            {/* RIGHT: Polaroid photos layout (with proper spacing & visibility) */}
+            <div className="lg:col-span-5 relative flex items-center justify-center min-h-[380px] sm:min-h-[440px] lg:min-h-[480px]">
+              {/* Radial glow background */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="w-80 h-80 rounded-full bg-sky-200/40 blur-3xl" />
+              </div>
+
+              {/* Mobile stacked view / Desktop overlapping polaroids */}
+              <div className="relative w-full max-w-md flex items-center justify-center">
+
+                {/* Polaroid 1 — Back Layer (Rotated Right & Shifted Right so it's fully visible) */}
+                <div
+                  className="absolute sm:relative bg-white shadow-xl rounded-sm overflow-hidden polaroid-hover transition-all duration-300"
+                  style={{
+                    width: "250px",
+                    padding: "12px 12px 42px 12px",
+                    transform: "rotate(8deg) translateX(70px) translateY(-30px)",
+                    zIndex: 1,
+                  }}
+                >
+                  <div className="w-full overflow-hidden rounded-xs" style={{ height: "190px" }}>
+                    <img
+                      src="/about_photo_2.png"
+                      alt="Kurir KerjaIn"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <p className="text-[10px] font-bold text-slate-500 text-center mt-3 tracking-wide">Express Kurir · Jakarta</p>
+                </div>
+
+                {/* Polaroid 2 — Front Layer (Rotated Left & Shifted Left) */}
+                <div
+                  className="absolute bg-white shadow-2xl rounded-sm overflow-hidden polaroid-hover transition-all duration-300"
+                  style={{
+                    width: "260px",
+                    padding: "12px 12px 44px 12px",
+                    transform: "rotate(-6deg) translateX(-65px) translateY(25px)",
+                    zIndex: 2,
+                  }}
+                >
+                  <div className="w-full overflow-hidden rounded-xs" style={{ height: "205px" }}>
+                    <img
+                      src="/about_photo_1.png"
+                      alt="Pekerja KerjaIn"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <p className="text-[10px] font-bold text-slate-500 text-center mt-3 tracking-wide">Kasir Toko · Bandung</p>
+                </div>
+
+                {/* Floating badge */}
+                <div
+                  className="absolute bg-white/95 backdrop-blur-sm border border-slate-200 rounded-2xl px-5 py-3 shadow-xl flex items-center gap-3 transition-transform hover:scale-105"
+                  style={{ bottom: "-10px", right: "-10px", zIndex: 10 }}
+                >
+                  <div className="h-9 w-9 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
+                    <Icon name="check_circle" size={20} fill className="text-emerald-600" />
+                  </div>
                   <div>
-                    <h4 className="font-bold text-slate-900">{item.title}</h4>
-                    <p className="text-xs text-slate-500 mt-1 leading-relaxed">{item.desc}</p>
+                    <p className="text-xs font-black text-slate-900">Terverifikasi 100%</p>
+                    <p className="text-[10px] text-slate-500 font-medium">Identitas &amp; Legalitas UMKM</p>
                   </div>
                 </div>
-              ))}
+
+              </div>
             </div>
+
           </div>
         </div>
       </section>
+
+      {/* ─── FITUR UNGGULAN (ORBIT) ──────────────────────────────── */}
+      <FeaturesOrbit />
 
       {/* ─── CARA KERJA ──────────────────────────────────────────── */}
       <section id="cara-kerja" className="py-20 lg:py-28 bg-white">
@@ -320,7 +336,9 @@ export default function LandingPage() {
             {/* Applicant steps */}
             <div className="space-y-4">
               <div className="flex items-center gap-3 mb-6">
-                <div className="h-10 w-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center text-lg">👤</div>
+                <div className="h-10 w-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center">
+                  <Icon name="person" size={20} fill />
+                </div>
                 <h3 className="text-xl font-bold text-slate-900">Untuk Pencari Kerja</h3>
               </div>
               {howItWorksApplicant.map((step, i) => (
@@ -340,7 +358,9 @@ export default function LandingPage() {
             {/* Recruiter steps */}
             <div className="space-y-4">
               <div className="flex items-center gap-3 mb-6">
-                <div className="h-10 w-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-lg">🏢</div>
+                <div className="h-10 w-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center">
+                  <Icon name="business" size={20} fill />
+                </div>
                 <h3 className="text-xl font-bold text-slate-900">Untuk Pemilik UMKM</h3>
               </div>
               {howItWorksRecruiter.map((step, i) => (
@@ -360,154 +380,11 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ─── CARI KERJA / PREVIEW LOWONGAN ──────────────────────── */}
-      <section id="lowongan" className="py-20 lg:py-28 bg-slate-50 border-t border-slate-200/60">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
-              <div className="inline-flex px-3 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-bold mb-3">
-                Cari Kerja
-              </div>
-              <h2 className="text-4xl font-extrabold text-slate-900">Lowongan Terbaru</h2>
-              <p className="text-slate-500 text-sm mt-1">Klik lowongan untuk melamar — login diperlukan untuk melamar.</p>
-            </div>
-            <button
-              onClick={handleJobClick}
-              className="px-5 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl text-sm transition-all shrink-0"
-            >
-              Lihat Semua Lowongan →
-            </button>
-          </div>
+      {/* ─── CARI KERJA / PREVIEW LOWONGAN (WHAT WE MADE STYLE) ── */}
+      <JobsSpotlight jobs={previewJobs} onJobClick={handleJobClick} />
 
-          {/* Job Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {previewJobs.map((job) => (
-              <button
-                key={job.id}
-                onClick={handleJobClick}
-                className="text-left bg-white rounded-2xl border border-slate-200 hover:border-sky-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group w-full overflow-hidden flex flex-col justify-between"
-              >
-                {/* Cover Image */}
-                <div className="relative w-full h-36 overflow-hidden bg-slate-100 border-b border-slate-200 shrink-0">
-                  <img
-                    src={job.cover}
-                    alt={job.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  {/* Badges on Cover */}
-                  <div className="absolute top-3 right-3 flex items-center gap-1.5 flex-wrap">
-                    {job.is_urgent && (
-                      <span className="px-2 py-0.5 bg-red-500 text-white text-[9px] font-bold rounded-md shadow-sm uppercase tracking-wider">
-                        Urgent
-                      </span>
-                    )}
-                    <span className="px-2 py-0.5 bg-white text-slate-800 text-[9px] font-bold rounded-md shadow-sm">
-                      {job.type}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Content Body */}
-                <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                  <div className="space-y-3">
-                    {/* Company Info */}
-                    <div className="flex items-center gap-2.5">
-                      <div className={cn(
-                        "h-8 w-8 rounded-lg flex items-center justify-center text-xs font-extrabold text-white shrink-0 shadow-sm",
-                        job.companyColor
-                      )}>
-                        {job.companyInitials}
-                      </div>
-                      <div>
-                        <p className="text-xs font-bold text-slate-700 leading-none">{job.company}</p>
-                        <p className="text-[9px] text-slate-400 mt-1 leading-none">{job.location}</p>
-                      </div>
-                    </div>
-
-                    {/* Position & Description */}
-                    <div>
-                      <h3 className="font-extrabold text-slate-900 text-sm leading-snug group-hover:text-sky-600 transition-colors line-clamp-1">
-                        {job.title}
-                      </h3>
-                      <p className="text-xs text-slate-500 mt-2 line-clamp-2 leading-relaxed">
-                        {job.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Salary & Action hint */}
-                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2 mt-auto">
-                    <div>
-                      <p className="text-[9px] text-slate-450 font-bold uppercase tracking-wider leading-none text-slate-400">Upah / Gaji</p>
-                      <p className="text-xs font-black text-sky-600 mt-1">{job.salary}</p>
-                    </div>
-                    <span className="px-3 py-2 bg-sky-600 text-white text-xs font-bold rounded-lg group-hover:bg-sky-500 transition-colors shrink-0">
-                      Lamar Cepat
-                    </span>
-                  </div>
-                </div>
-              </button>
-            ))}
-          </div>
-
-          {/* Login prompt banner */}
-          <div className="bg-gradient-to-r from-sky-600 to-cyan-600 rounded-3xl p-8 text-white text-center space-y-4">
-            <h3 className="text-2xl font-extrabold">Mau Melamar? Login Dulu, Bos! 🙌</h3>
-            <p className="text-sky-100 text-sm max-w-md mx-auto">
-              Buat akun gratis untuk melamar lowongan, pantau status lamaran, dan terima notifikasi real-time.
-            </p>
-            <div className="flex flex-wrap justify-center gap-3 pt-2">
-              <Link href="/register"
-                className="px-6 py-3 bg-white text-sky-600 hover:bg-sky-50 font-bold rounded-xl text-sm transition-all shadow-lg">
-                Daftar Gratis Sekarang
-              </Link>
-              <Link href="/login"
-                className="px-6 py-3 bg-sky-700/50 hover:bg-sky-700/70 text-white border border-sky-400/50 font-bold rounded-xl text-sm transition-all">
-                Masuk ke Akun
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── TESTIMONIALS ────────────────────────────────────────── */}
-      <section className="py-20 lg:py-28 bg-white border-t border-slate-200/60">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="text-center space-y-3">
-            <div className="inline-flex px-3 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-bold">
-              Testimoni
-            </div>
-            <h2 className="text-4xl font-extrabold text-slate-900">Dipercaya Ribuan Pengguna</h2>
-            <p className="text-slate-500 text-sm">Cerita nyata dari pekerja dan pemilik UMKM yang merasakan manfaatnya.</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
-              <div key={i} className={`p-6 rounded-2xl border space-y-4 flex flex-col justify-between ${t.bg}`}>
-                <div>
-                  <div className="flex mb-4">
-                    {[...Array(5)].map((_, s) => (
-                      <svg key={s} className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                      </svg>
-                    ))}
-                  </div>
-                  <p className="text-sm text-slate-700 leading-relaxed italic">&ldquo;{t.quote}&rdquo;</p>
-                </div>
-                <div className="flex items-center gap-3 pt-3 border-t border-slate-200/60">
-                  <div className={`h-9 w-9 rounded-full flex items-center justify-center text-xs font-bold ${t.avatar}`}>
-                    {t.initials}
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-slate-900">{t.name}</p>
-                    <p className="text-[10px] text-slate-500">{t.role}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ─── TESTIMONIALS (WHAT THEY SAY STYLE) ─────────────────── */}
+      <TestimonialsCarousel />
 
       {/* ─── FINAL CTA ───────────────────────────────────────────── */}
       <section className="py-20 bg-slate-900 text-white relative overflow-hidden">
@@ -522,7 +399,7 @@ export default function LandingPage() {
           <div className="flex flex-wrap justify-center gap-4 pt-2">
             <Link href="/register"
               className="px-8 py-4 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl shadow-lg shadow-sky-900/40 hover:-translate-y-0.5 transition-all">
-              Daftar Gratis Sekarang ✨
+              Daftar Gratis Sekarang
             </Link>
             <Link href="/login"
               className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-bold rounded-xl transition-all">
@@ -543,7 +420,9 @@ export default function LandingPage() {
         >
           <div className="w-full max-w-sm bg-white rounded-3xl shadow-2xl p-6 space-y-5 animate-slide-up">
             <div className="text-center space-y-2">
-              <div className="h-14 w-14 bg-sky-100 rounded-2xl flex items-center justify-center text-2xl mx-auto">🔑</div>
+              <div className="h-14 w-14 bg-sky-100 rounded-2xl flex items-center justify-center mx-auto">
+                <Icon name="key" size={28} fill className="text-sky-600" />
+              </div>
               <h3 className="text-xl font-extrabold text-slate-900">Login Diperlukan</h3>
               <p className="text-sm text-slate-500">Pilih jenis akun Anda untuk melanjutkan melamar kerja atau merekrut staf.</p>
             </div>
@@ -554,7 +433,9 @@ export default function LandingPage() {
                 className="w-full flex items-center justify-between p-4 rounded-2xl border-2 border-sky-200 hover:border-sky-400 hover:bg-sky-50/50 transition-all group cursor-pointer"
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-xl">👤</span>
+                  <div className="h-10 w-10 rounded-xl bg-sky-100 flex items-center justify-center shrink-0">
+                    <Icon name="person" size={20} fill className="text-sky-600" />
+                  </div>
                   <div className="text-left">
                     <p className="font-bold text-slate-900 text-sm">Saya Pencari Kerja</p>
                     <p className="text-xs text-slate-500">Cari & lamar lowongan harian</p>
@@ -568,7 +449,9 @@ export default function LandingPage() {
                 className="w-full flex items-center justify-between p-4 rounded-2xl border-2 border-amber-200 hover:border-amber-400 hover:bg-amber-50/50 transition-all group cursor-pointer"
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-xl">🏢</span>
+                  <div className="h-10 w-10 rounded-xl bg-amber-100 flex items-center justify-center shrink-0">
+                    <Icon name="business" size={20} fill className="text-amber-600" />
+                  </div>
                   <div className="text-left">
                     <p className="font-bold text-slate-900 text-sm">Saya Pemilik UMKM</p>
                     <p className="text-xs text-slate-500">Rekrut staf & kelola lowongan</p>
