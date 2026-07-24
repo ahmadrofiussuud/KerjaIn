@@ -43,7 +43,7 @@ export function JobsSpotlight({ jobs, onJobClick }: JobsSpotlightProps) {
 
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             {/* Left Column: Heading & CTA (4 columns on lg) */}
-            <div className="lg:col-span-4 space-y-5 text-left">
+            <div className="lg:col-span-4 space-y-5 text-center lg:text-left flex flex-col items-center lg:items-start">
               <div className="space-y-2">
                 <p className="text-xs font-extrabold uppercase tracking-widest text-slate-400">
                   LOWONGAN TERBARU
@@ -55,7 +55,7 @@ export function JobsSpotlight({ jobs, onJobClick }: JobsSpotlightProps) {
               <p className="text-slate-600 text-sm leading-relaxed">
                 Ratusan UMKM terpercaya membuka kesempatan staf harian, shift, dan paruh waktu setiap harinya.
               </p>
-              <div className="pt-1">
+              <div className="pt-1 w-full sm:w-auto">
                 <button
                   onClick={onJobClick}
                   className="w-full sm:w-auto px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm rounded-xl transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5"

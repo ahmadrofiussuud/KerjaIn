@@ -205,7 +205,7 @@ export default function LandingPage() {
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
             {/* LEFT: Text card */}
-            <div className="lg:col-span-7 bg-white border border-slate-200/80 rounded-3xl p-8 sm:p-10 lg:p-12 shadow-sm space-y-6">
+            <div className="lg:col-span-7 bg-white border border-slate-200/80 rounded-3xl p-8 sm:p-10 lg:p-12 shadow-sm space-y-6 text-center lg:text-left flex flex-col items-center lg:items-start">
               <div className="space-y-2">
                 <p className="text-xs font-extrabold text-slate-400 uppercase tracking-widest">Tentang Kami</p>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
@@ -224,7 +224,7 @@ export default function LandingPage() {
               </p>
 
               {/* Stats row */}
-              <div className="grid grid-cols-3 gap-6 pt-4 border-t border-slate-100">
+              <div className="grid grid-cols-3 gap-6 pt-4 border-t border-slate-100 w-full">
                 {[
                   { value: "50K+",  label: "Pekerja Terdaftar" },
                   { value: "8K+",   label: "UMKM Mitra" },
@@ -237,7 +237,7 @@ export default function LandingPage() {
                 ))}
               </div>
 
-              <div className="flex flex-wrap gap-4 pt-2">
+              <div className="flex flex-wrap justify-center lg:justify-start gap-4 pt-2 w-full">
                 <Link href="/register" className="px-7 py-3.5 bg-sky-600 hover:bg-sky-500 text-white text-sm font-bold rounded-xl transition-all shadow-md hover:-translate-y-0.5 hover:shadow-lg">
                   Mulai Sekarang
                 </Link>
